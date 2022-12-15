@@ -1,15 +1,16 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "InfoTour",
+    "slug": "InfoTour",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/icon1.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashart1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#AC58AA",
+      "privacy": "public"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

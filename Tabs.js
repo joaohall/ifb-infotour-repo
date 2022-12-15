@@ -11,20 +11,23 @@ import MapSearchPage from "./Screens/Main/MapSearchPage";
 import MainPage from "./Screens/Main/MainPage";
 import CameraAIPage from "./Screens/Main/CameraAIPage";
 
-const jeito = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    }
-})
+const bottomtab = createBottomTabNavigator();
 
 export default function Tabs(){
     return(
-        <View style={jeito.container}>
-            <MapView style={jeito.container}/>
-        </View>
+        <NavigationContainer>
+            <bottomtab.Navigator
+            initialRouteName={MainPage}
+            screenOptions={{
+                tabBarStyle: {position: 'absolute', height: 70},
+                headerShown: false
+                
+            }}
+            >
+                <bottomtab.Screen name={'MapSearch'} component={MapSearchPage}/>
+                <bottomtab.Screen name={'Home'} component={MainPage}/>
+                <bottomtab.Screen name={'AI'} component={CameraAIPage}/>
+            </bottomtab.Navigator>
+        </NavigationContainer>
     )
 }

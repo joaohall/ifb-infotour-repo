@@ -25,30 +25,9 @@ import { View, StyleSheet} from "react-native";
         };
 
         //Código retirado de 'https://stackoverflow.com/questions/53358630/get-lat-and-long-from-expo-location-to-fetch-on-map'
-
-        const [location, setLocation] = useState(null);
-        const [errorMsg, setErrorMsg] = useState(null);
-      
-        useEffect(() => {
-          (async () => {
-            
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-              setErrorMsg('Permission to access location was denied');
-              return;
-            }
-      
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
-          })();
-        }, []);
-
             return(
                 <View style={jeito.container}>
-                    <MapView style={jeito.container}
-                         initialRegion={
-                            location}
-                    />
+                    <MapView style={jeito.container}/>
                 </View>
         )};
       

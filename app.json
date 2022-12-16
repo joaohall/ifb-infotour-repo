@@ -1,4 +1,4 @@
-{
+{ 
   "expo": {
     "name": "InfoTour",
     "slug": "InfoTour",
@@ -22,6 +22,9 @@
       "supportsTablet": true
     },
     "android": {
+      "andoid-permissions":{
+        "permissions" : "CAMERA"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

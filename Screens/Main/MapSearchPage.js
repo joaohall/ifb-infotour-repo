@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Text } from 'react-native';
 import MapView from "react-native-maps";
-import { View, StyleSheet} from "react-native";
+import { View, StyleSheet,TextInput, Keyboard, Button} from "react-native";
 
 
     //Jeito foi nomeado por causa da Lórean
@@ -13,11 +12,10 @@ import { View, StyleSheet} from "react-native";
         map: {
             width: '100%',
             height: '100%',
-        }
+        },
     })
-    
-    
-    export default function Tabs(){
+
+    export default function Tabs({clicked, searchPhrase, setSearchPhrase, setCLicked}){
         let state = {
             location: null,
             region: null,

@@ -1,66 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet ,Text, View, Button, Image, TouchableOpacity} from 'react-native';
-import { Camera } from 'expo-camera';
+import { View, StyleSheet, Text,  SafeAreaView, TouchableOpacity, Button } from "react-native";
+import { Camera, WhiteBalance } from "expo-camera";
+import { useState, useEffect } from "react";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
-export default function CameraAIPage() {
-  const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  const [camera, setCamera] = useState(null);
-  const [image, setImage] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-useEffect(() => {
-    (async () => {
-    const ratios = await camera.getSupportedRatiosAsync();
-    const cameraStatus = await Camera.requestCameraPermissionsAsync();
-    setHasCameraPermission(cameraStatus.status === 'granted');
-})();
-  }, []);
-const takePicture = async () => {
-    if(camera){
-        const data = await camera.takePictureAsync(null)
-        setImage(data.uri);
-    }
+//Precisamos mandar a foto manipulada para o MDB
+export default function CameraAIPage(){
+
+  const CameraScreen = () => {
+    useEffect(() => {}, [])
+    return(<Camera/>)
+  };
+    
+
+  const[type, setType] = useState(Camera.Constants.Type.back);
+  const[hasPermission, setHaspermission] = useState(null);
+
+
+  useEffect(() => {
+    (async () =>{
+      const status = await Camera.requestCameraPermissionsAsync();
+      setHaspermission(status==='granted')
+    })();
+  }, [])
+  
+  if(hasPermission===null){
+      return <View/>;
   }
 
-  if (hasCameraPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-  return (
-   <View style={{ flex: 1}}>
-      <View style={styles.cameraContainer}>
-            <Camera 
-            ref={ref => setCamera(ref)}
-            style={styles.fixedRatio} 
-            type={type}
-            ratio={'4:3'} />
-      </View>
-            <TouchableOpacity style={styles.takePictureButton}>
-              <Text style={styles.buttontext}>Descubra o seu ponto!</Text>
+  return(
+    <View style={styles.container}>
+      <Camera
+        style={styles.camera}
+        type={type}
+        aspect={{9:16}}>
+          <View style={{flex:1, backgroundColor: 'transparent', flexDirection: 'row', borderRadius:70}}>
+            <TouchableOpacity style={{
+              position: 'absolute',
+              bottom:150,
+              left: 40,
+            }}
+            onPress={() => {
+              setType(
+                type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back
+              );
+            }}>
+              <Text style={styles.changecamera}>Trocar camera</Text>
             </TouchableOpacity>
-   </View>
-  );
+          </View>
+      <SafeAreaView style={styles.container}>
+          <TouchableOpacity style={styles.button}>
+              <Text style={{color:'white', fontSize: 40}}>Tirar foto</Text>
+          </TouchableOpacity>
+      </SafeAreaView>
+          
+        </Camera>
+        
+    </View>
+  )
+
 }
 const styles = StyleSheet.create({
-
-    
-  cameraContainer: {
-      marginTop:80,
-      position:'absolute',
-      alignItems:'center',
-      flex: 1,
-      flexDirection: 'row',
-      
+  container: {
+    flex:1,
+    justifyContent:"center",
   },
-  fixedRatio:{
-      alignContent: 'flex-end',
-      flex: 1,
-      aspectRatio: 0.7,
-      borderRadius:60
+  camera: {
+    position:'relative',
+    bottom:10,
+    width:660,
+    height:900,    
   },
-  buttontext:{
-    fontSize: 30
-  },
-  takePictureButton:{
+  button:{
+    justifyContent:'center',
+    alignItems: 'center',
     position:'absolute',
-
+    bottom: 20,
+    backgroundColor: '#AD53AB',
+    margin:10,
+    borderRadius:10,
+    height: 90,
+    width: 370,
+  },
+  changecamera:{
+    color:'white',
+    borderRadius:20,
   }
 })

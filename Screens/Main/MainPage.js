@@ -3,10 +3,6 @@ import { Text } from "react-native";
 import * as Font from 'expo-font';
 import { StyleSheet } from "react-native";
 
-async function loadFonts() {
-	await Font.loadAsync({
-		PoppinsBold: require('assets\fonts\PoppinsBold.ttf'),
-	});}
 
 const style = StyleSheet.create({   
     goodmorningText:{
@@ -15,7 +11,6 @@ const style = StyleSheet.create({
         left: 38,
         top: 105,
         fontSize: 29,
-        fontFamily: 'PoppinsBold'
     }
 })
 

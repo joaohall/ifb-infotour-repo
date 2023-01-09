@@ -1,9 +1,3 @@
-import { View, VirtualizedList } from "react-native";
-import MapView from "react-native-maps";
-import { StyleSheet } from "react-native";
-import { Text } from "react-native";
-
-//Icons
 import HomeIcon from "./assets/icons/SVGhomeIcon";
 import SearchIcon from "./assets/icons/SVGSearchIcon";
 import AiIcon from "./assets/icons/SVGaiIcon";

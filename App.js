@@ -1,12 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Login from './Screens/loginpage';
+import Tabs from './Screens/Tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+const Stack = createStackNavigator();
 
-import Tabs from './Tabs';
 
 export default function App() {
   return (
-       <Tabs/>
+    <NavigationContainer options={{headerShown:false}}>
+    <Stack.Navigator options={{headerShown:false}}>
+      <Stack.Screen name="Login" component={Login} independent={true} options={{headerShown:false}}/>
+      <Stack.Screen name="Tabs" component={Tabs} independent={true} options={{headerShown:false}}/>
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 }

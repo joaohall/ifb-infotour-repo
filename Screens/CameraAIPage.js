@@ -1,7 +1,11 @@
-import { View, StyleSheet, Text,  SafeAreaView, TouchableOpacity, Button } from "react-native";
+import { View, StyleSheet, Text,  SafeAreaView, TouchableOpacity, Image } from "react-native";
 import { Camera, WhiteBalance } from "expo-camera";
 import { useState, useEffect } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import SVGpictureButton from "../assets/icons/image/SVGpictureButton";
+import SVGCameraInnerLines from "../assets/icons/SVGCameraInnerLines";
+import SVGChangeCamera from "../assets/icons/SVGChangeCamera";
+import { useIsFocused } from '@react-navigation/native';
 
 //Precisamos mandar a foto manipulada para o MDB
 export default function CameraAIPage(){
@@ -26,35 +30,32 @@ export default function CameraAIPage(){
   if(hasPermission===null){
       return <View/>;
   }
+  
 
   return(
     <View style={styles.container}>
-      <Camera
-        style={styles.camera}
-        type={type}
-        aspect={{9:16}}>
-          <View style={{flex:1, backgroundColor: 'transparent', flexDirection: 'row', borderRadius:70}}>
-            <TouchableOpacity style={{
-              position: 'absolute',
-              bottom:150,
-              left: 40,
-            }}
+    <TouchableOpacity style={styles.button}
             onPress={() => {
               setType(
                 type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back
               );
             }}>
-              <Text style={styles.changecamera}>Trocar camera</Text>
+              <SVGChangeCamera style={{flex:1,width:90, height:90, position:'relative', right:120}}></SVGChangeCamera>
             </TouchableOpacity>
+      <Camera
+        style={styles.camera}
+        type={type}
+        >
+          <View style={{flex:1, backgroundColor: 'transparent', borderRadius:70, alignItems:'center'}}>
+            <SVGCameraInnerLines style={styles.innerlines}></SVGCameraInnerLines>
           </View>
-      <SafeAreaView style={styles.container}>
-          <TouchableOpacity style={styles.button}>
-              <Text style={{color:'white', fontSize: 40}}>Tirar foto</Text>
-          </TouchableOpacity>
-      </SafeAreaView>
           
         </Camera>
-        
+        <SafeAreaView style={styles.container}>
+          <TouchableOpacity style={styles.button}>
+              <SVGpictureButton></SVGpictureButton>
+          </TouchableOpacity>
+      </SafeAreaView>
     </View>
   )
 
@@ -66,23 +67,30 @@ const styles = StyleSheet.create({
   },
   camera: {
     position:'relative',
-    bottom:10,
-    width:660,
-    height:900,    
+    alignSelf:"center",
+    bottom:90,
+    width:580,
+    height:760,
   },
   button:{
     justifyContent:'center',
     alignItems: 'center',
+    alignSelf:'center',
     position:'absolute',
-    bottom: 20,
-    backgroundColor: '#AD53AB',
+    bottom: 60,
+    backgroundColor: 'transparent',
     margin:10,
-    borderRadius:10,
-    height: 90,
-    width: 370,
+    borderRadius: 90,
+    height: 100,
+    width: 100,
   },
   changecamera:{
     color:'white',
     borderRadius:20,
-  }
+  },
+  innerlines:{
+    top:200,
+    alignContent:'center',
+    alignSelf:'center'
+  },
 })
